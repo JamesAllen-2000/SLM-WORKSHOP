@@ -1,0 +1,465 @@
+{
+  "schema_version": "1.0",
+  "record_type": "ticket_service_report",
+  "synthetic_training_record": true,
+  "generated_on": "2026-09-04",
+  "use_case": "Gas Compressor Vibration",
+  "asset": {
+    "tag": "GC-301",
+    "name": "Export Gas Compressor C-301",
+    "site": "Central Compression Station",
+    "equipment_class": "centrifugal gas compressor"
+  },
+  "service_tickets": [
+    {
+      "ticket_id": "SR-20260125-001",
+      "service_type": "Field troubleshooting and maintenance",
+      "asset_tag": "GC-301",
+      "asset_name": "Export Gas Compressor C-301",
+      "site": "Central Compression Station",
+      "requestor": "Control Room",
+      "assigned_team": "Rotating Equipment",
+      "priority": "P1",
+      "status": "closed",
+      "problem_code": "bearing_overheating",
+      "reported_condition": "3.0 mm/s RMS; 68 \u00b0C bearing; 10.2 barg suction; 30.1 barg discharge; 68 % load",
+      "diagnosis": "Likely contributor: rotor imbalance, coupling alignment, lubrication, liquid carryover, foundation/piping forces, seal gas, or control instability. Confirmed through trend comparison, independent measurement, and approved inspection/testing.",
+      "corrective_action": [
+        "Place asset in approved safe state or controlled reduced-load operation when the trigger is reached.",
+        "Confirm the indication with a calibrated or independent measurement and compare with the operating reference.",
+        "Inspect or test the named component/process path under permit and LOTO requirements.",
+        "Repair, clean, adjust, replace, or reconfigure the identified cause using the approved work order.",
+        "Return the asset gradually and verify the measurable post-work condition."
+      ],
+      "expected_result": "2.8 mm/s RMS; 70 \u00b0C bearing; 10.0 barg suction; 29.6 barg discharge; 65 % load",
+      "closed_by": "Maintenance Supervisor",
+      "closure_evidence": [
+        "operator log",
+        "instrument trend",
+        "work order",
+        "post-maintenance verification"
+      ],
+      "next_review_date": "2026-10-02"
+    },
+    {
+      "ticket_id": "SR-20260211-002",
+      "service_type": "Field troubleshooting and maintenance",
+      "asset_tag": "GC-301",
+      "asset_name": "Export Gas Compressor C-301",
+      "site": "Central Compression Station",
+      "requestor": "Field Operations",
+      "assigned_team": "Rotating Equipment",
+      "priority": "P2",
+      "status": "closed",
+      "problem_code": "coupling_misalignment",
+      "reported_condition": "3.0 mm/s RMS; 68 \u00b0C bearing; 10.2 barg suction; 30.1 barg discharge; 68 % load",
+      "diagnosis": "Likely contributor: rotor imbalance, coupling alignment, lubrication, liquid carryover, foundation/piping forces, seal gas, or control instability. Confirmed through trend comparison, independent measurement, and approved inspection/testing.",
+      "corrective_action": [
+        "Place asset in approved safe state or controlled reduced-load operation when the trigger is reached.",
+        "Confirm the indication with a calibrated or independent measurement and compare with the operating reference.",
+        "Inspect or test the named component/process path under permit and LOTO requirements.",
+        "Repair, clean, adjust, replace, or reconfigure the identified cause using the approved work order.",
+        "Return the asset gradually and verify the measurable post-work condition."
+      ],
+      "expected_result": "2.8 mm/s RMS; 70 \u00b0C bearing; 10.0 barg suction; 29.6 barg discharge; 65 % load",
+      "closed_by": "Maintenance Supervisor",
+      "closure_evidence": [
+        "operator log",
+        "instrument trend",
+        "work order",
+        "post-maintenance verification"
+      ],
+      "next_review_date": "2026-10-03"
+    },
+    {
+      "ticket_id": "SR-20260228-003",
+      "service_type": "Field troubleshooting and maintenance",
+      "asset_tag": "GC-301",
+      "asset_name": "Export Gas Compressor C-301",
+      "site": "Central Compression Station",
+      "requestor": "Control Room",
+      "assigned_team": "Rotating Equipment",
+      "priority": "P3",
+      "status": "closed",
+      "problem_code": "rotor_imbalance",
+      "reported_condition": "3.0 mm/s RMS; 68 \u00b0C bearing; 10.2 barg suction; 30.1 barg discharge; 68 % load",
+      "diagnosis": "Likely contributor: rotor imbalance, coupling alignment, lubrication, liquid carryover, foundation/piping forces, seal gas, or control instability. Confirmed through trend comparison, independent measurement, and approved inspection/testing.",
+      "corrective_action": [
+        "Place asset in approved safe state or controlled reduced-load operation when the trigger is reached.",
+        "Confirm the indication with a calibrated or independent measurement and compare with the operating reference.",
+        "Inspect or test the named component/process path under permit and LOTO requirements.",
+        "Repair, clean, adjust, replace, or reconfigure the identified cause using the approved work order.",
+        "Return the asset gradually and verify the measurable post-work condition."
+      ],
+      "expected_result": "2.8 mm/s RMS; 70 \u00b0C bearing; 10.0 barg suction; 29.6 barg discharge; 65 % load",
+      "closed_by": "Maintenance Supervisor",
+      "closure_evidence": [
+        "operator log",
+        "instrument trend",
+        "work order",
+        "post-maintenance verification"
+      ],
+      "next_review_date": "2026-10-04"
+    },
+    {
+      "ticket_id": "SR-20260317-004",
+      "service_type": "Field troubleshooting and maintenance",
+      "asset_tag": "GC-301",
+      "asset_name": "Export Gas Compressor C-301",
+      "site": "Central Compression Station",
+      "requestor": "Field Operations",
+      "assigned_team": "Rotating Equipment",
+      "priority": "P2",
+      "status": "closed",
+      "problem_code": "lubrication_problem",
+      "reported_condition": "3.0 mm/s RMS; 68 \u00b0C bearing; 10.2 barg suction; 30.1 barg discharge; 68 % load",
+      "diagnosis": "Likely contributor: rotor imbalance, coupling alignment, lubrication, liquid carryover, foundation/piping forces, seal gas, or control instability. Confirmed through trend comparison, independent measurement, and approved inspection/testing.",
+      "corrective_action": [
+        "Place asset in approved safe state or controlled reduced-load operation when the trigger is reached.",
+        "Confirm the indication with a calibrated or independent measurement and compare with the operating reference.",
+        "Inspect or test the named component/process path under permit and LOTO requirements.",
+        "Repair, clean, adjust, replace, or reconfigure the identified cause using the approved work order.",
+        "Return the asset gradually and verify the measurable post-work condition."
+      ],
+      "expected_result": "2.8 mm/s RMS; 70 \u00b0C bearing; 10.0 barg suction; 29.6 barg discharge; 65 % load",
+      "closed_by": "Maintenance Supervisor",
+      "closure_evidence": [
+        "operator log",
+        "instrument trend",
+        "work order",
+        "post-maintenance verification"
+      ],
+      "next_review_date": "2026-10-05"
+    },
+    {
+      "ticket_id": "SR-20260403-005",
+      "service_type": "Field troubleshooting and maintenance",
+      "asset_tag": "GC-301",
+      "asset_name": "Export Gas Compressor C-301",
+      "site": "Central Compression Station",
+      "requestor": "Control Room",
+      "assigned_team": "Rotating Equipment",
+      "priority": "P1",
+      "status": "closed",
+      "problem_code": "liquid_carryover",
+      "reported_condition": "3.0 mm/s RMS; 68 \u00b0C bearing; 10.2 barg suction; 30.1 barg discharge; 68 % load",
+      "diagnosis": "Likely contributor: rotor imbalance, coupling alignment, lubrication, liquid carryover, foundation/piping forces, seal gas, or control instability. Confirmed through trend comparison, independent measurement, and approved inspection/testing.",
+      "corrective_action": [
+        "Place asset in approved safe state or controlled reduced-load operation when the trigger is reached.",
+        "Confirm the indication with a calibrated or independent measurement and compare with the operating reference.",
+        "Inspect or test the named component/process path under permit and LOTO requirements.",
+        "Repair, clean, adjust, replace, or reconfigure the identified cause using the approved work order.",
+        "Return the asset gradually and verify the measurable post-work condition."
+      ],
+      "expected_result": "2.8 mm/s RMS; 70 \u00b0C bearing; 10.0 barg suction; 29.6 barg discharge; 65 % load",
+      "closed_by": "Maintenance Supervisor",
+      "closure_evidence": [
+        "operator log",
+        "instrument trend",
+        "work order",
+        "post-maintenance verification"
+      ],
+      "next_review_date": "2026-10-06"
+    },
+    {
+      "ticket_id": "SR-20260420-006",
+      "service_type": "Field troubleshooting and maintenance",
+      "asset_tag": "GC-301",
+      "asset_name": "Export Gas Compressor C-301",
+      "site": "Central Compression Station",
+      "requestor": "Field Operations",
+      "assigned_team": "Rotating Equipment",
+      "priority": "P3",
+      "status": "closed",
+      "problem_code": "high_suction_pressure",
+      "reported_condition": "3.0 mm/s RMS; 68 \u00b0C bearing; 10.2 barg suction; 30.1 barg discharge; 68 % load",
+      "diagnosis": "Likely contributor: rotor imbalance, coupling alignment, lubrication, liquid carryover, foundation/piping forces, seal gas, or control instability. Confirmed through trend comparison, independent measurement, and approved inspection/testing.",
+      "corrective_action": [
+        "Place asset in approved safe state or controlled reduced-load operation when the trigger is reached.",
+        "Confirm the indication with a calibrated or independent measurement and compare with the operating reference.",
+        "Inspect or test the named component/process path under permit and LOTO requirements.",
+        "Repair, clean, adjust, replace, or reconfigure the identified cause using the approved work order.",
+        "Return the asset gradually and verify the measurable post-work condition."
+      ],
+      "expected_result": "2.8 mm/s RMS; 70 \u00b0C bearing; 10.0 barg suction; 29.6 barg discharge; 65 % load",
+      "closed_by": "Maintenance Supervisor",
+      "closure_evidence": [
+        "operator log",
+        "instrument trend",
+        "work order",
+        "post-maintenance verification"
+      ],
+      "next_review_date": "2026-10-07"
+    },
+    {
+      "ticket_id": "SR-20260507-007",
+      "service_type": "Field troubleshooting and maintenance",
+      "asset_tag": "GC-301",
+      "asset_name": "Export Gas Compressor C-301",
+      "site": "Central Compression Station",
+      "requestor": "Control Room",
+      "assigned_team": "Rotating Equipment",
+      "priority": "P2",
+      "status": "closed",
+      "problem_code": "low_suction_pressure",
+      "reported_condition": "3.0 mm/s RMS; 68 \u00b0C bearing; 10.2 barg suction; 30.1 barg discharge; 68 % load",
+      "diagnosis": "Likely contributor: rotor imbalance, coupling alignment, lubrication, liquid carryover, foundation/piping forces, seal gas, or control instability. Confirmed through trend comparison, independent measurement, and approved inspection/testing.",
+      "corrective_action": [
+        "Place asset in approved safe state or controlled reduced-load operation when the trigger is reached.",
+        "Confirm the indication with a calibrated or independent measurement and compare with the operating reference.",
+        "Inspect or test the named component/process path under permit and LOTO requirements.",
+        "Repair, clean, adjust, replace, or reconfigure the identified cause using the approved work order.",
+        "Return the asset gradually and verify the measurable post-work condition."
+      ],
+      "expected_result": "2.8 mm/s RMS; 70 \u00b0C bearing; 10.0 barg suction; 29.6 barg discharge; 65 % load",
+      "closed_by": "Maintenance Supervisor",
+      "closure_evidence": [
+        "operator log",
+        "instrument trend",
+        "work order",
+        "post-maintenance verification"
+      ],
+      "next_review_date": "2026-10-08"
+    },
+    {
+      "ticket_id": "SR-20260524-008",
+      "service_type": "Field troubleshooting and maintenance",
+      "asset_tag": "GC-301",
+      "asset_name": "Export Gas Compressor C-301",
+      "site": "Central Compression Station",
+      "requestor": "Field Operations",
+      "assigned_team": "Rotating Equipment",
+      "priority": "P2",
+      "status": "closed",
+      "problem_code": "high_discharge_pressure",
+      "reported_condition": "3.0 mm/s RMS; 68 \u00b0C bearing; 10.2 barg suction; 30.1 barg discharge; 68 % load",
+      "diagnosis": "Likely contributor: rotor imbalance, coupling alignment, lubrication, liquid carryover, foundation/piping forces, seal gas, or control instability. Confirmed through trend comparison, independent measurement, and approved inspection/testing.",
+      "corrective_action": [
+        "Place asset in approved safe state or controlled reduced-load operation when the trigger is reached.",
+        "Confirm the indication with a calibrated or independent measurement and compare with the operating reference.",
+        "Inspect or test the named component/process path under permit and LOTO requirements.",
+        "Repair, clean, adjust, replace, or reconfigure the identified cause using the approved work order.",
+        "Return the asset gradually and verify the measurable post-work condition."
+      ],
+      "expected_result": "2.8 mm/s RMS; 70 \u00b0C bearing; 10.0 barg suction; 29.6 barg discharge; 65 % load",
+      "closed_by": "Maintenance Supervisor",
+      "closure_evidence": [
+        "operator log",
+        "instrument trend",
+        "work order",
+        "post-maintenance verification"
+      ],
+      "next_review_date": "2026-10-09"
+    },
+    {
+      "ticket_id": "SR-20260610-009",
+      "service_type": "Field troubleshooting and maintenance",
+      "asset_tag": "GC-301",
+      "asset_name": "Export Gas Compressor C-301",
+      "site": "Central Compression Station",
+      "requestor": "Control Room",
+      "assigned_team": "Rotating Equipment",
+      "priority": "P3",
+      "status": "closed",
+      "problem_code": "anti-surge_instability",
+      "reported_condition": "3.0 mm/s RMS; 68 \u00b0C bearing; 10.2 barg suction; 30.1 barg discharge; 68 % load",
+      "diagnosis": "Likely contributor: rotor imbalance, coupling alignment, lubrication, liquid carryover, foundation/piping forces, seal gas, or control instability. Confirmed through trend comparison, independent measurement, and approved inspection/testing.",
+      "corrective_action": [
+        "Place asset in approved safe state or controlled reduced-load operation when the trigger is reached.",
+        "Confirm the indication with a calibrated or independent measurement and compare with the operating reference.",
+        "Inspect or test the named component/process path under permit and LOTO requirements.",
+        "Repair, clean, adjust, replace, or reconfigure the identified cause using the approved work order.",
+        "Return the asset gradually and verify the measurable post-work condition."
+      ],
+      "expected_result": "2.8 mm/s RMS; 70 \u00b0C bearing; 10.0 barg suction; 29.6 barg discharge; 65 % load",
+      "closed_by": "Maintenance Supervisor",
+      "closure_evidence": [
+        "operator log",
+        "instrument trend",
+        "work order",
+        "post-maintenance verification"
+      ],
+      "next_review_date": "2026-10-10"
+    },
+    {
+      "ticket_id": "SR-20260627-010",
+      "service_type": "Field troubleshooting and maintenance",
+      "asset_tag": "GC-301",
+      "asset_name": "Export Gas Compressor C-301",
+      "site": "Central Compression Station",
+      "requestor": "Field Operations",
+      "assigned_team": "Rotating Equipment",
+      "priority": "P1",
+      "status": "closed",
+      "problem_code": "high-load_vibration",
+      "reported_condition": "3.0 mm/s RMS; 68 \u00b0C bearing; 10.2 barg suction; 30.1 barg discharge; 68 % load",
+      "diagnosis": "Likely contributor: rotor imbalance, coupling alignment, lubrication, liquid carryover, foundation/piping forces, seal gas, or control instability. Confirmed through trend comparison, independent measurement, and approved inspection/testing.",
+      "corrective_action": [
+        "Place asset in approved safe state or controlled reduced-load operation when the trigger is reached.",
+        "Confirm the indication with a calibrated or independent measurement and compare with the operating reference.",
+        "Inspect or test the named component/process path under permit and LOTO requirements.",
+        "Repair, clean, adjust, replace, or reconfigure the identified cause using the approved work order.",
+        "Return the asset gradually and verify the measurable post-work condition."
+      ],
+      "expected_result": "2.8 mm/s RMS; 70 \u00b0C bearing; 10.0 barg suction; 29.6 barg discharge; 65 % load",
+      "closed_by": "Maintenance Supervisor",
+      "closure_evidence": [
+        "operator log",
+        "instrument trend",
+        "work order",
+        "post-maintenance verification"
+      ],
+      "next_review_date": "2026-10-11"
+    },
+    {
+      "ticket_id": "SR-20260714-011",
+      "service_type": "Field troubleshooting and maintenance",
+      "asset_tag": "GC-301",
+      "asset_name": "Export Gas Compressor C-301",
+      "site": "Central Compression Station",
+      "requestor": "Control Room",
+      "assigned_team": "Rotating Equipment",
+      "priority": "P2",
+      "status": "closed",
+      "problem_code": "vibration_after_maintenance",
+      "reported_condition": "3.0 mm/s RMS; 68 \u00b0C bearing; 10.2 barg suction; 30.1 barg discharge; 68 % load",
+      "diagnosis": "Likely contributor: rotor imbalance, coupling alignment, lubrication, liquid carryover, foundation/piping forces, seal gas, or control instability. Confirmed through trend comparison, independent measurement, and approved inspection/testing.",
+      "corrective_action": [
+        "Place asset in approved safe state or controlled reduced-load operation when the trigger is reached.",
+        "Confirm the indication with a calibrated or independent measurement and compare with the operating reference.",
+        "Inspect or test the named component/process path under permit and LOTO requirements.",
+        "Repair, clean, adjust, replace, or reconfigure the identified cause using the approved work order.",
+        "Return the asset gradually and verify the measurable post-work condition."
+      ],
+      "expected_result": "2.8 mm/s RMS; 70 \u00b0C bearing; 10.0 barg suction; 29.6 barg discharge; 65 % load",
+      "closed_by": "Maintenance Supervisor",
+      "closure_evidence": [
+        "operator log",
+        "instrument trend",
+        "work order",
+        "post-maintenance verification"
+      ],
+      "next_review_date": "2026-10-12"
+    },
+    {
+      "ticket_id": "SR-20260731-012",
+      "service_type": "Field troubleshooting and maintenance",
+      "asset_tag": "GC-301",
+      "asset_name": "Export Gas Compressor C-301",
+      "site": "Central Compression Station",
+      "requestor": "Field Operations",
+      "assigned_team": "Rotating Equipment",
+      "priority": "P3",
+      "status": "closed",
+      "problem_code": "foundation_looseness",
+      "reported_condition": "3.0 mm/s RMS; 68 \u00b0C bearing; 10.2 barg suction; 30.1 barg discharge; 68 % load",
+      "diagnosis": "Likely contributor: rotor imbalance, coupling alignment, lubrication, liquid carryover, foundation/piping forces, seal gas, or control instability. Confirmed through trend comparison, independent measurement, and approved inspection/testing.",
+      "corrective_action": [
+        "Place asset in approved safe state or controlled reduced-load operation when the trigger is reached.",
+        "Confirm the indication with a calibrated or independent measurement and compare with the operating reference.",
+        "Inspect or test the named component/process path under permit and LOTO requirements.",
+        "Repair, clean, adjust, replace, or reconfigure the identified cause using the approved work order.",
+        "Return the asset gradually and verify the measurable post-work condition."
+      ],
+      "expected_result": "2.8 mm/s RMS; 70 \u00b0C bearing; 10.0 barg suction; 29.6 barg discharge; 65 % load",
+      "closed_by": "Maintenance Supervisor",
+      "closure_evidence": [
+        "operator log",
+        "instrument trend",
+        "work order",
+        "post-maintenance verification"
+      ],
+      "next_review_date": "2026-10-13"
+    },
+    {
+      "ticket_id": "SR-20260817-013",
+      "service_type": "Field troubleshooting and maintenance",
+      "asset_tag": "GC-301",
+      "asset_name": "Export Gas Compressor C-301",
+      "site": "Central Compression Station",
+      "requestor": "Control Room",
+      "assigned_team": "Rotating Equipment",
+      "priority": "P2",
+      "status": "closed",
+      "problem_code": "piping_vibration",
+      "reported_condition": "3.0 mm/s RMS; 68 \u00b0C bearing; 10.2 barg suction; 30.1 barg discharge; 68 % load",
+      "diagnosis": "Likely contributor: rotor imbalance, coupling alignment, lubrication, liquid carryover, foundation/piping forces, seal gas, or control instability. Confirmed through trend comparison, independent measurement, and approved inspection/testing.",
+      "corrective_action": [
+        "Place asset in approved safe state or controlled reduced-load operation when the trigger is reached.",
+        "Confirm the indication with a calibrated or independent measurement and compare with the operating reference.",
+        "Inspect or test the named component/process path under permit and LOTO requirements.",
+        "Repair, clean, adjust, replace, or reconfigure the identified cause using the approved work order.",
+        "Return the asset gradually and verify the measurable post-work condition."
+      ],
+      "expected_result": "2.8 mm/s RMS; 70 \u00b0C bearing; 10.0 barg suction; 29.6 barg discharge; 65 % load",
+      "closed_by": "Maintenance Supervisor",
+      "closure_evidence": [
+        "operator log",
+        "instrument trend",
+        "work order",
+        "post-maintenance verification"
+      ],
+      "next_review_date": "2026-10-14"
+    },
+    {
+      "ticket_id": "SR-20260903-014",
+      "service_type": "Field troubleshooting and maintenance",
+      "asset_tag": "GC-301",
+      "asset_name": "Export Gas Compressor C-301",
+      "site": "Central Compression Station",
+      "requestor": "Field Operations",
+      "assigned_team": "Rotating Equipment",
+      "priority": "P2",
+      "status": "monitoring",
+      "problem_code": "seal-gas_problem",
+      "reported_condition": "3.0 mm/s RMS; 68 \u00b0C bearing; 10.2 barg suction; 30.1 barg discharge; 68 % load",
+      "diagnosis": "Likely contributor: rotor imbalance, coupling alignment, lubrication, liquid carryover, foundation/piping forces, seal gas, or control instability. Confirmed through trend comparison, independent measurement, and approved inspection/testing.",
+      "corrective_action": [
+        "Place asset in approved safe state or controlled reduced-load operation when the trigger is reached.",
+        "Confirm the indication with a calibrated or independent measurement and compare with the operating reference.",
+        "Inspect or test the named component/process path under permit and LOTO requirements.",
+        "Repair, clean, adjust, replace, or reconfigure the identified cause using the approved work order.",
+        "Return the asset gradually and verify the measurable post-work condition."
+      ],
+      "expected_result": "2.8 mm/s RMS; 70 \u00b0C bearing; 10.0 barg suction; 29.6 barg discharge; 65 % load",
+      "closed_by": "Maintenance Supervisor",
+      "closure_evidence": [
+        "operator log",
+        "instrument trend",
+        "work order",
+        "post-maintenance verification"
+      ],
+      "next_review_date": "2026-10-15"
+    },
+    {
+      "ticket_id": "SR-20260920-015",
+      "service_type": "Field troubleshooting and maintenance",
+      "asset_tag": "GC-301",
+      "asset_name": "Export Gas Compressor C-301",
+      "site": "Central Compression Station",
+      "requestor": "Control Room",
+      "assigned_team": "Rotating Equipment",
+      "priority": "P3",
+      "status": "monitoring",
+      "problem_code": "discharge_pulsation",
+      "reported_condition": "3.0 mm/s RMS; 68 \u00b0C bearing; 10.2 barg suction; 30.1 barg discharge; 68 % load",
+      "diagnosis": "Likely contributor: rotor imbalance, coupling alignment, lubrication, liquid carryover, foundation/piping forces, seal gas, or control instability. Confirmed through trend comparison, independent measurement, and approved inspection/testing.",
+      "corrective_action": [
+        "Place asset in approved safe state or controlled reduced-load operation when the trigger is reached.",
+        "Confirm the indication with a calibrated or independent measurement and compare with the operating reference.",
+        "Inspect or test the named component/process path under permit and LOTO requirements.",
+        "Repair, clean, adjust, replace, or reconfigure the identified cause using the approved work order.",
+        "Return the asset gradually and verify the measurable post-work condition."
+      ],
+      "expected_result": "2.8 mm/s RMS; 70 \u00b0C bearing; 10.0 barg suction; 29.6 barg discharge; 65 % load",
+      "closed_by": "Maintenance Supervisor",
+      "closure_evidence": [
+        "operator log",
+        "instrument trend",
+        "work order",
+        "post-maintenance verification"
+      ],
+      "next_review_date": "2026-10-16"
+    }
+  ]
+}

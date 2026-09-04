@@ -1,0 +1,465 @@
+{
+  "schema_version": "1.0",
+  "record_type": "ticket_service_report",
+  "synthetic_training_record": true,
+  "generated_on": "2026-09-04",
+  "use_case": "Separator Pressure Anomaly",
+  "asset": {
+    "tag": "SEP-101",
+    "name": "Three-Phase Production Separator V-101",
+    "site": "Central Processing Facility",
+    "equipment_class": "three-phase separator"
+  },
+  "service_tickets": [
+    {
+      "ticket_id": "SR-20260125-001",
+      "service_type": "Field troubleshooting and maintenance",
+      "asset_tag": "SEP-101",
+      "asset_name": "Three-Phase Production Separator V-101",
+      "site": "Central Processing Facility",
+      "requestor": "Control Room",
+      "assigned_team": "Process",
+      "priority": "P1",
+      "status": "closed",
+      "problem_code": "high_separator_pressure",
+      "reported_condition": "8.2 barg; 3.4 MMSm\u00b3/d gas; 182 m\u00b3/h liquid; 54 % level; 48 % valve",
+      "diagnosis": "Likely contributor: pressure-control valve response, downstream restriction, liquid level, slugging, gas-flow change, relief response, or instrumentation. Confirmed through trend comparison, independent measurement, and approved inspection/testing.",
+      "corrective_action": [
+        "Place asset in approved safe state or controlled reduced-load operation when the trigger is reached.",
+        "Confirm the indication with a calibrated or independent measurement and compare with the operating reference.",
+        "Inspect or test the named component/process path under permit and LOTO requirements.",
+        "Repair, clean, adjust, replace, or reconfigure the identified cause using the approved work order.",
+        "Return the asset gradually and verify the measurable post-work condition."
+      ],
+      "expected_result": "8.4 barg; 3.3 MMSm\u00b3/d gas; 180 m\u00b3/h liquid; 56 % level; 51 % valve",
+      "closed_by": "Maintenance Supervisor",
+      "closure_evidence": [
+        "operator log",
+        "instrument trend",
+        "work order",
+        "post-maintenance verification"
+      ],
+      "next_review_date": "2026-10-02"
+    },
+    {
+      "ticket_id": "SR-20260211-002",
+      "service_type": "Field troubleshooting and maintenance",
+      "asset_tag": "SEP-101",
+      "asset_name": "Three-Phase Production Separator V-101",
+      "site": "Central Processing Facility",
+      "requestor": "Field Operations",
+      "assigned_team": "Process",
+      "priority": "P2",
+      "status": "closed",
+      "problem_code": "low_separator_pressure",
+      "reported_condition": "8.2 barg; 3.4 MMSm\u00b3/d gas; 182 m\u00b3/h liquid; 54 % level; 48 % valve",
+      "diagnosis": "Likely contributor: pressure-control valve response, downstream restriction, liquid level, slugging, gas-flow change, relief response, or instrumentation. Confirmed through trend comparison, independent measurement, and approved inspection/testing.",
+      "corrective_action": [
+        "Place asset in approved safe state or controlled reduced-load operation when the trigger is reached.",
+        "Confirm the indication with a calibrated or independent measurement and compare with the operating reference.",
+        "Inspect or test the named component/process path under permit and LOTO requirements.",
+        "Repair, clean, adjust, replace, or reconfigure the identified cause using the approved work order.",
+        "Return the asset gradually and verify the measurable post-work condition."
+      ],
+      "expected_result": "8.4 barg; 3.3 MMSm\u00b3/d gas; 180 m\u00b3/h liquid; 56 % level; 51 % valve",
+      "closed_by": "Maintenance Supervisor",
+      "closure_evidence": [
+        "operator log",
+        "instrument trend",
+        "work order",
+        "post-maintenance verification"
+      ],
+      "next_review_date": "2026-10-03"
+    },
+    {
+      "ticket_id": "SR-20260228-003",
+      "service_type": "Field troubleshooting and maintenance",
+      "asset_tag": "SEP-101",
+      "asset_name": "Three-Phase Production Separator V-101",
+      "site": "Central Processing Facility",
+      "requestor": "Control Room",
+      "assigned_team": "Process",
+      "priority": "P3",
+      "status": "closed",
+      "problem_code": "pressure_fluctuation",
+      "reported_condition": "8.2 barg; 3.4 MMSm\u00b3/d gas; 182 m\u00b3/h liquid; 54 % level; 48 % valve",
+      "diagnosis": "Likely contributor: pressure-control valve response, downstream restriction, liquid level, slugging, gas-flow change, relief response, or instrumentation. Confirmed through trend comparison, independent measurement, and approved inspection/testing.",
+      "corrective_action": [
+        "Place asset in approved safe state or controlled reduced-load operation when the trigger is reached.",
+        "Confirm the indication with a calibrated or independent measurement and compare with the operating reference.",
+        "Inspect or test the named component/process path under permit and LOTO requirements.",
+        "Repair, clean, adjust, replace, or reconfigure the identified cause using the approved work order.",
+        "Return the asset gradually and verify the measurable post-work condition."
+      ],
+      "expected_result": "8.4 barg; 3.3 MMSm\u00b3/d gas; 180 m\u00b3/h liquid; 56 % level; 51 % valve",
+      "closed_by": "Maintenance Supervisor",
+      "closure_evidence": [
+        "operator log",
+        "instrument trend",
+        "work order",
+        "post-maintenance verification"
+      ],
+      "next_review_date": "2026-10-04"
+    },
+    {
+      "ticket_id": "SR-20260317-004",
+      "service_type": "Field troubleshooting and maintenance",
+      "asset_tag": "SEP-101",
+      "asset_name": "Three-Phase Production Separator V-101",
+      "site": "Central Processing Facility",
+      "requestor": "Field Operations",
+      "assigned_team": "Process",
+      "priority": "P2",
+      "status": "closed",
+      "problem_code": "control_valve_stuck_open",
+      "reported_condition": "8.2 barg; 3.4 MMSm\u00b3/d gas; 182 m\u00b3/h liquid; 54 % level; 48 % valve",
+      "diagnosis": "Likely contributor: pressure-control valve response, downstream restriction, liquid level, slugging, gas-flow change, relief response, or instrumentation. Confirmed through trend comparison, independent measurement, and approved inspection/testing.",
+      "corrective_action": [
+        "Place asset in approved safe state or controlled reduced-load operation when the trigger is reached.",
+        "Confirm the indication with a calibrated or independent measurement and compare with the operating reference.",
+        "Inspect or test the named component/process path under permit and LOTO requirements.",
+        "Repair, clean, adjust, replace, or reconfigure the identified cause using the approved work order.",
+        "Return the asset gradually and verify the measurable post-work condition."
+      ],
+      "expected_result": "8.4 barg; 3.3 MMSm\u00b3/d gas; 180 m\u00b3/h liquid; 56 % level; 51 % valve",
+      "closed_by": "Maintenance Supervisor",
+      "closure_evidence": [
+        "operator log",
+        "instrument trend",
+        "work order",
+        "post-maintenance verification"
+      ],
+      "next_review_date": "2026-10-05"
+    },
+    {
+      "ticket_id": "SR-20260403-005",
+      "service_type": "Field troubleshooting and maintenance",
+      "asset_tag": "SEP-101",
+      "asset_name": "Three-Phase Production Separator V-101",
+      "site": "Central Processing Facility",
+      "requestor": "Control Room",
+      "assigned_team": "Process",
+      "priority": "P1",
+      "status": "closed",
+      "problem_code": "control_valve_stuck_closed",
+      "reported_condition": "8.2 barg; 3.4 MMSm\u00b3/d gas; 182 m\u00b3/h liquid; 54 % level; 48 % valve",
+      "diagnosis": "Likely contributor: pressure-control valve response, downstream restriction, liquid level, slugging, gas-flow change, relief response, or instrumentation. Confirmed through trend comparison, independent measurement, and approved inspection/testing.",
+      "corrective_action": [
+        "Place asset in approved safe state or controlled reduced-load operation when the trigger is reached.",
+        "Confirm the indication with a calibrated or independent measurement and compare with the operating reference.",
+        "Inspect or test the named component/process path under permit and LOTO requirements.",
+        "Repair, clean, adjust, replace, or reconfigure the identified cause using the approved work order.",
+        "Return the asset gradually and verify the measurable post-work condition."
+      ],
+      "expected_result": "8.4 barg; 3.3 MMSm\u00b3/d gas; 180 m\u00b3/h liquid; 56 % level; 51 % valve",
+      "closed_by": "Maintenance Supervisor",
+      "closure_evidence": [
+        "operator log",
+        "instrument trend",
+        "work order",
+        "post-maintenance verification"
+      ],
+      "next_review_date": "2026-10-06"
+    },
+    {
+      "ticket_id": "SR-20260420-006",
+      "service_type": "Field troubleshooting and maintenance",
+      "asset_tag": "SEP-101",
+      "asset_name": "Three-Phase Production Separator V-101",
+      "site": "Central Processing Facility",
+      "requestor": "Field Operations",
+      "assigned_team": "Process",
+      "priority": "P3",
+      "status": "closed",
+      "problem_code": "downstream_gas_restriction",
+      "reported_condition": "8.2 barg; 3.4 MMSm\u00b3/d gas; 182 m\u00b3/h liquid; 54 % level; 48 % valve",
+      "diagnosis": "Likely contributor: pressure-control valve response, downstream restriction, liquid level, slugging, gas-flow change, relief response, or instrumentation. Confirmed through trend comparison, independent measurement, and approved inspection/testing.",
+      "corrective_action": [
+        "Place asset in approved safe state or controlled reduced-load operation when the trigger is reached.",
+        "Confirm the indication with a calibrated or independent measurement and compare with the operating reference.",
+        "Inspect or test the named component/process path under permit and LOTO requirements.",
+        "Repair, clean, adjust, replace, or reconfigure the identified cause using the approved work order.",
+        "Return the asset gradually and verify the measurable post-work condition."
+      ],
+      "expected_result": "8.4 barg; 3.3 MMSm\u00b3/d gas; 180 m\u00b3/h liquid; 56 % level; 51 % valve",
+      "closed_by": "Maintenance Supervisor",
+      "closure_evidence": [
+        "operator log",
+        "instrument trend",
+        "work order",
+        "post-maintenance verification"
+      ],
+      "next_review_date": "2026-10-07"
+    },
+    {
+      "ticket_id": "SR-20260507-007",
+      "service_type": "Field troubleshooting and maintenance",
+      "asset_tag": "SEP-101",
+      "asset_name": "Three-Phase Production Separator V-101",
+      "site": "Central Processing Facility",
+      "requestor": "Control Room",
+      "assigned_team": "Process",
+      "priority": "P2",
+      "status": "closed",
+      "problem_code": "high_liquid_level_with_pressure_increase",
+      "reported_condition": "8.2 barg; 3.4 MMSm\u00b3/d gas; 182 m\u00b3/h liquid; 54 % level; 48 % valve",
+      "diagnosis": "Likely contributor: pressure-control valve response, downstream restriction, liquid level, slugging, gas-flow change, relief response, or instrumentation. Confirmed through trend comparison, independent measurement, and approved inspection/testing.",
+      "corrective_action": [
+        "Place asset in approved safe state or controlled reduced-load operation when the trigger is reached.",
+        "Confirm the indication with a calibrated or independent measurement and compare with the operating reference.",
+        "Inspect or test the named component/process path under permit and LOTO requirements.",
+        "Repair, clean, adjust, replace, or reconfigure the identified cause using the approved work order.",
+        "Return the asset gradually and verify the measurable post-work condition."
+      ],
+      "expected_result": "8.4 barg; 3.3 MMSm\u00b3/d gas; 180 m\u00b3/h liquid; 56 % level; 51 % valve",
+      "closed_by": "Maintenance Supervisor",
+      "closure_evidence": [
+        "operator log",
+        "instrument trend",
+        "work order",
+        "post-maintenance verification"
+      ],
+      "next_review_date": "2026-10-08"
+    },
+    {
+      "ticket_id": "SR-20260524-008",
+      "service_type": "Field troubleshooting and maintenance",
+      "asset_tag": "SEP-101",
+      "asset_name": "Three-Phase Production Separator V-101",
+      "site": "Central Processing Facility",
+      "requestor": "Field Operations",
+      "assigned_team": "Process",
+      "priority": "P2",
+      "status": "closed",
+      "problem_code": "gas_flow_reduction",
+      "reported_condition": "8.2 barg; 3.4 MMSm\u00b3/d gas; 182 m\u00b3/h liquid; 54 % level; 48 % valve",
+      "diagnosis": "Likely contributor: pressure-control valve response, downstream restriction, liquid level, slugging, gas-flow change, relief response, or instrumentation. Confirmed through trend comparison, independent measurement, and approved inspection/testing.",
+      "corrective_action": [
+        "Place asset in approved safe state or controlled reduced-load operation when the trigger is reached.",
+        "Confirm the indication with a calibrated or independent measurement and compare with the operating reference.",
+        "Inspect or test the named component/process path under permit and LOTO requirements.",
+        "Repair, clean, adjust, replace, or reconfigure the identified cause using the approved work order.",
+        "Return the asset gradually and verify the measurable post-work condition."
+      ],
+      "expected_result": "8.4 barg; 3.3 MMSm\u00b3/d gas; 180 m\u00b3/h liquid; 56 % level; 51 % valve",
+      "closed_by": "Maintenance Supervisor",
+      "closure_evidence": [
+        "operator log",
+        "instrument trend",
+        "work order",
+        "post-maintenance verification"
+      ],
+      "next_review_date": "2026-10-09"
+    },
+    {
+      "ticket_id": "SR-20260610-009",
+      "service_type": "Field troubleshooting and maintenance",
+      "asset_tag": "SEP-101",
+      "asset_name": "Three-Phase Production Separator V-101",
+      "site": "Central Processing Facility",
+      "requestor": "Control Room",
+      "assigned_team": "Process",
+      "priority": "P3",
+      "status": "closed",
+      "problem_code": "gas_flow_increase",
+      "reported_condition": "8.2 barg; 3.4 MMSm\u00b3/d gas; 182 m\u00b3/h liquid; 54 % level; 48 % valve",
+      "diagnosis": "Likely contributor: pressure-control valve response, downstream restriction, liquid level, slugging, gas-flow change, relief response, or instrumentation. Confirmed through trend comparison, independent measurement, and approved inspection/testing.",
+      "corrective_action": [
+        "Place asset in approved safe state or controlled reduced-load operation when the trigger is reached.",
+        "Confirm the indication with a calibrated or independent measurement and compare with the operating reference.",
+        "Inspect or test the named component/process path under permit and LOTO requirements.",
+        "Repair, clean, adjust, replace, or reconfigure the identified cause using the approved work order.",
+        "Return the asset gradually and verify the measurable post-work condition."
+      ],
+      "expected_result": "8.4 barg; 3.3 MMSm\u00b3/d gas; 180 m\u00b3/h liquid; 56 % level; 51 % valve",
+      "closed_by": "Maintenance Supervisor",
+      "closure_evidence": [
+        "operator log",
+        "instrument trend",
+        "work order",
+        "post-maintenance verification"
+      ],
+      "next_review_date": "2026-10-10"
+    },
+    {
+      "ticket_id": "SR-20260627-010",
+      "service_type": "Field troubleshooting and maintenance",
+      "asset_tag": "SEP-101",
+      "asset_name": "Three-Phase Production Separator V-101",
+      "site": "Central Processing Facility",
+      "requestor": "Field Operations",
+      "assigned_team": "Process",
+      "priority": "P1",
+      "status": "closed",
+      "problem_code": "instrument_disagreement",
+      "reported_condition": "8.2 barg; 3.4 MMSm\u00b3/d gas; 182 m\u00b3/h liquid; 54 % level; 48 % valve",
+      "diagnosis": "Likely contributor: pressure-control valve response, downstream restriction, liquid level, slugging, gas-flow change, relief response, or instrumentation. Confirmed through trend comparison, independent measurement, and approved inspection/testing.",
+      "corrective_action": [
+        "Place asset in approved safe state or controlled reduced-load operation when the trigger is reached.",
+        "Confirm the indication with a calibrated or independent measurement and compare with the operating reference.",
+        "Inspect or test the named component/process path under permit and LOTO requirements.",
+        "Repair, clean, adjust, replace, or reconfigure the identified cause using the approved work order.",
+        "Return the asset gradually and verify the measurable post-work condition."
+      ],
+      "expected_result": "8.4 barg; 3.3 MMSm\u00b3/d gas; 180 m\u00b3/h liquid; 56 % level; 51 % valve",
+      "closed_by": "Maintenance Supervisor",
+      "closure_evidence": [
+        "operator log",
+        "instrument trend",
+        "work order",
+        "post-maintenance verification"
+      ],
+      "next_review_date": "2026-10-11"
+    },
+    {
+      "ticket_id": "SR-20260714-011",
+      "service_type": "Field troubleshooting and maintenance",
+      "asset_tag": "SEP-101",
+      "asset_name": "Three-Phase Production Separator V-101",
+      "site": "Central Processing Facility",
+      "requestor": "Control Room",
+      "assigned_team": "Process",
+      "priority": "P2",
+      "status": "closed",
+      "problem_code": "pressure-control_instability",
+      "reported_condition": "8.2 barg; 3.4 MMSm\u00b3/d gas; 182 m\u00b3/h liquid; 54 % level; 48 % valve",
+      "diagnosis": "Likely contributor: pressure-control valve response, downstream restriction, liquid level, slugging, gas-flow change, relief response, or instrumentation. Confirmed through trend comparison, independent measurement, and approved inspection/testing.",
+      "corrective_action": [
+        "Place asset in approved safe state or controlled reduced-load operation when the trigger is reached.",
+        "Confirm the indication with a calibrated or independent measurement and compare with the operating reference.",
+        "Inspect or test the named component/process path under permit and LOTO requirements.",
+        "Repair, clean, adjust, replace, or reconfigure the identified cause using the approved work order.",
+        "Return the asset gradually and verify the measurable post-work condition."
+      ],
+      "expected_result": "8.4 barg; 3.3 MMSm\u00b3/d gas; 180 m\u00b3/h liquid; 56 % level; 51 % valve",
+      "closed_by": "Maintenance Supervisor",
+      "closure_evidence": [
+        "operator log",
+        "instrument trend",
+        "work order",
+        "post-maintenance verification"
+      ],
+      "next_review_date": "2026-10-12"
+    },
+    {
+      "ticket_id": "SR-20260731-012",
+      "service_type": "Field troubleshooting and maintenance",
+      "asset_tag": "SEP-101",
+      "asset_name": "Three-Phase Production Separator V-101",
+      "site": "Central Processing Facility",
+      "requestor": "Field Operations",
+      "assigned_team": "Process",
+      "priority": "P3",
+      "status": "closed",
+      "problem_code": "relief-device_event",
+      "reported_condition": "8.2 barg; 3.4 MMSm\u00b3/d gas; 182 m\u00b3/h liquid; 54 % level; 48 % valve",
+      "diagnosis": "Likely contributor: pressure-control valve response, downstream restriction, liquid level, slugging, gas-flow change, relief response, or instrumentation. Confirmed through trend comparison, independent measurement, and approved inspection/testing.",
+      "corrective_action": [
+        "Place asset in approved safe state or controlled reduced-load operation when the trigger is reached.",
+        "Confirm the indication with a calibrated or independent measurement and compare with the operating reference.",
+        "Inspect or test the named component/process path under permit and LOTO requirements.",
+        "Repair, clean, adjust, replace, or reconfigure the identified cause using the approved work order.",
+        "Return the asset gradually and verify the measurable post-work condition."
+      ],
+      "expected_result": "8.4 barg; 3.3 MMSm\u00b3/d gas; 180 m\u00b3/h liquid; 56 % level; 51 % valve",
+      "closed_by": "Maintenance Supervisor",
+      "closure_evidence": [
+        "operator log",
+        "instrument trend",
+        "work order",
+        "post-maintenance verification"
+      ],
+      "next_review_date": "2026-10-13"
+    },
+    {
+      "ticket_id": "SR-20260817-013",
+      "service_type": "Field troubleshooting and maintenance",
+      "asset_tag": "SEP-101",
+      "asset_name": "Three-Phase Production Separator V-101",
+      "site": "Central Processing Facility",
+      "requestor": "Control Room",
+      "assigned_team": "Process",
+      "priority": "P2",
+      "status": "closed",
+      "problem_code": "upstream_slugging",
+      "reported_condition": "8.2 barg; 3.4 MMSm\u00b3/d gas; 182 m\u00b3/h liquid; 54 % level; 48 % valve",
+      "diagnosis": "Likely contributor: pressure-control valve response, downstream restriction, liquid level, slugging, gas-flow change, relief response, or instrumentation. Confirmed through trend comparison, independent measurement, and approved inspection/testing.",
+      "corrective_action": [
+        "Place asset in approved safe state or controlled reduced-load operation when the trigger is reached.",
+        "Confirm the indication with a calibrated or independent measurement and compare with the operating reference.",
+        "Inspect or test the named component/process path under permit and LOTO requirements.",
+        "Repair, clean, adjust, replace, or reconfigure the identified cause using the approved work order.",
+        "Return the asset gradually and verify the measurable post-work condition."
+      ],
+      "expected_result": "8.4 barg; 3.3 MMSm\u00b3/d gas; 180 m\u00b3/h liquid; 56 % level; 51 % valve",
+      "closed_by": "Maintenance Supervisor",
+      "closure_evidence": [
+        "operator log",
+        "instrument trend",
+        "work order",
+        "post-maintenance verification"
+      ],
+      "next_review_date": "2026-10-14"
+    },
+    {
+      "ticket_id": "SR-20260903-014",
+      "service_type": "Field troubleshooting and maintenance",
+      "asset_tag": "SEP-101",
+      "asset_name": "Three-Phase Production Separator V-101",
+      "site": "Central Processing Facility",
+      "requestor": "Field Operations",
+      "assigned_team": "Process",
+      "priority": "P2",
+      "status": "monitoring",
+      "problem_code": "downstream_valve_problem",
+      "reported_condition": "8.2 barg; 3.4 MMSm\u00b3/d gas; 182 m\u00b3/h liquid; 54 % level; 48 % valve",
+      "diagnosis": "Likely contributor: pressure-control valve response, downstream restriction, liquid level, slugging, gas-flow change, relief response, or instrumentation. Confirmed through trend comparison, independent measurement, and approved inspection/testing.",
+      "corrective_action": [
+        "Place asset in approved safe state or controlled reduced-load operation when the trigger is reached.",
+        "Confirm the indication with a calibrated or independent measurement and compare with the operating reference.",
+        "Inspect or test the named component/process path under permit and LOTO requirements.",
+        "Repair, clean, adjust, replace, or reconfigure the identified cause using the approved work order.",
+        "Return the asset gradually and verify the measurable post-work condition."
+      ],
+      "expected_result": "8.4 barg; 3.3 MMSm\u00b3/d gas; 180 m\u00b3/h liquid; 56 % level; 51 % valve",
+      "closed_by": "Maintenance Supervisor",
+      "closure_evidence": [
+        "operator log",
+        "instrument trend",
+        "work order",
+        "post-maintenance verification"
+      ],
+      "next_review_date": "2026-10-15"
+    },
+    {
+      "ticket_id": "SR-20260920-015",
+      "service_type": "Field troubleshooting and maintenance",
+      "asset_tag": "SEP-101",
+      "asset_name": "Three-Phase Production Separator V-101",
+      "site": "Central Processing Facility",
+      "requestor": "Control Room",
+      "assigned_team": "Process",
+      "priority": "P3",
+      "status": "monitoring",
+      "problem_code": "abnormal_after_maintenance",
+      "reported_condition": "8.2 barg; 3.4 MMSm\u00b3/d gas; 182 m\u00b3/h liquid; 54 % level; 48 % valve",
+      "diagnosis": "Likely contributor: pressure-control valve response, downstream restriction, liquid level, slugging, gas-flow change, relief response, or instrumentation. Confirmed through trend comparison, independent measurement, and approved inspection/testing.",
+      "corrective_action": [
+        "Place asset in approved safe state or controlled reduced-load operation when the trigger is reached.",
+        "Confirm the indication with a calibrated or independent measurement and compare with the operating reference.",
+        "Inspect or test the named component/process path under permit and LOTO requirements.",
+        "Repair, clean, adjust, replace, or reconfigure the identified cause using the approved work order.",
+        "Return the asset gradually and verify the measurable post-work condition."
+      ],
+      "expected_result": "8.4 barg; 3.3 MMSm\u00b3/d gas; 180 m\u00b3/h liquid; 56 % level; 51 % valve",
+      "closed_by": "Maintenance Supervisor",
+      "closure_evidence": [
+        "operator log",
+        "instrument trend",
+        "work order",
+        "post-maintenance verification"
+      ],
+      "next_review_date": "2026-10-16"
+    }
+  ]
+}
