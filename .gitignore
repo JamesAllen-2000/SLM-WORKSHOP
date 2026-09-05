@@ -40,5 +40,29 @@ Thumbs.db
 # ========================================
 # MODELS
 # ========================================
-# Too large for git. Distributed to participants separately (USB / shared drive).
+# Too large for git. GitHub hard-rejects any file over 100 MB, and the base
+# model alone is 1.9 GB. Distributed to participants separately instead
+# (USB stick, shared drive, or a Google Drive link) - see ORGANIZER.md.
 /models
+
+# ========================================
+# SET-ASIDE / SCRAP
+# ========================================
+# Staging folders for files moved out of models/ before building the
+# participant bundle:
+#   _scrap/       intermediates from 03_quantize_gguf.py (merged_*, *-f16.gguf)
+#   _old_models/  superseded adapters and their GGUFs
+# Safe to delete once your demos are verified. Never committed - same size
+# problem as models/ above.
+/_scrap
+/_old_models
+_bak_*
+
+# ========================================
+# DISTRIBUTION ARCHIVES
+# ========================================
+# The zipped model bundle for participants (~2.5 GB). Git cannot take this -
+# GitHub rejects any file over 100 MB - so share it via Google Drive, a USB
+# stick, or a GitHub Release instead. See ORGANIZER.md.
+*.zip
+models.zip
