@@ -12,6 +12,8 @@ env/
 # ========================================
 # VECTOR DATABASES (RAG)
 # ========================================
+# NOTE: chroma_db/ is built by 01_rag_baseline.py during pre-workshop setup.
+# If you distribute a pre-built database to participants, comment this line out.
 chroma_db/
 .chroma/
 
@@ -22,7 +24,9 @@ results/
 analysis/
 *.log
 *.txt
-
+# requirements.txt MUST stay tracked - it is the first command participants run.
+# The blanket *.txt rule above would otherwise silently exclude it.
+!requirements.txt
 
 # ========================================
 # IDE & OS FILES
@@ -33,5 +37,8 @@ analysis/
 .DS_Store
 Thumbs.db
 
+# ========================================
+# MODELS
+# ========================================
+# Too large for git. Distributed to participants separately (USB / shared drive).
 /models
-

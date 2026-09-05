@@ -1,9 +1,19 @@
+"""
+=============================================================================
+ CENTRAL CONFIGURATION - every script in this workshop imports from here.
+=============================================================================
+ If you want to change the model, the prompts, or how RAG behaves, this is
+ the ONLY file you need to edit. Nothing else hard-codes these values.
+=============================================================================
+"""
 import os
 
 # =============================================================================
-# WORKSHOP MODEL CONFIGURATION
+# SECTION 1: WHICH MODEL ARE WE USING?
 # =============================================================================
-# Uncomment the model you want to actively use for the pipeline
+# The workshop ships with Gemma-3 1B (instruction-tuned). The commented lines
+# are alternatives you can experiment with AFTER the workshop - each one needs
+# a fresh run of 00 -> 01 -> 02 -> 03 to rebuild all the artifacts.
 
 ACTIVE_MODEL_ID = "google/gemma-3-1b-it"
 # ACTIVE_MODEL_ID = "Qwen/Qwen3-1.7B"
@@ -11,38 +21,238 @@ ACTIVE_MODEL_ID = "google/gemma-3-1b-it"
 # ACTIVE_MODEL_ID = "Qwen/Qwen2.5-0.5B"
 
 # =============================================================================
-# DYNAMIC PATH GENERATION
+# SECTION 2: WHERE THINGS LIVE ON DISK
 # =============================================================================
 def get_safe_model_name():
-    """Extracts just the size tag to keep Windows paths extremely short (e.g. 1.7B)"""
+    """
+    Turns a long HuggingFace repo id into a very short folder name.
+
+    "google/gemma-3-1b-it" -> "it"     (so the model lands in models/it)
+
+    Why so short? Windows has a 260-character path limit (MAX_PATH). Model
+    folders contain deeply nested files, so a long project path plus a long
+    model name overflows it and the download fails.
+    """
     return ACTIVE_MODEL_ID.split("-")[-1]
 
-# All downstream scripts will import this dynamically isolated folder path
-# We use an ultra-short path to prevent Windows MAX_PATH (260 char) errors during HF download
+
+# The base model downloaded by 00_download_base.py
 LOCAL_MODEL_DIR = f"models/{get_safe_model_name()}"
 
+# --- RAG storage ------------------------------------------------------------
+# Built once by 01_rag_baseline.py, then read by every RAG demo.
+CHROMA_DB_PATH = "./chroma_db"
+COLLECTION_NAME = "workshop_knowledge"
+
+# --- Embedding model (turns text into vectors for RAG search) ---------------
+# This is a SECOND, much smaller model (~90 MB) separate from the LLM.
+# It is downloaded alongside the base model in 00_download_base.py so the
+# workshop stays fully offline - see get_embedder_path() below.
+EMBEDDING_MODEL_ID = "sentence-transformers/all-MiniLM-L6-v2"
+EMBEDDING_MODEL_DIR = "models/embedder"
+
+
+def trim_runaway(answer):
+    """
+    Cut a looping answer off at the point it starts repeating itself.
+
+    WHY THIS EXISTS - and it is worth explaining to participants:
+
+    A 1-billion-parameter model sometimes gets stuck in a loop. It finishes a
+    perfectly good [ ACTION PLAN ], then instead of stopping it invents
+    "[ ACTION PLAN DETAILS ]" and writes the same five steps again, and again,
+    until it runs out of tokens. Bigger models do this far less.
+
+    We keep the first, good copy of each section and drop the repeats. The
+    answer stays complete - we are cutting duplicated tail, not information.
+
+    Returns (trimmed_answer, lines_removed) so the caller can be honest on
+    screen about the fact that trimming happened.
+    """
+    import difflib
+    import re
+
+    expected = ("[ SUMMARY ]", "[ POTENTIAL CAUSES ]", "[ ACTION PLAN ]")
+
+    def normalise(text):
+        """Strip list markers and filler so near-identical steps compare equal."""
+        t = text.strip().lower()
+        t = re.sub(r"^[-*•]\s*", "", t)        # bullet
+        t = re.sub(r"^\d+[.)]\s*", "", t)           # "3. " / "3) "
+        t = re.sub(r"^(the|a|an)\s+", "", t)        # leading article
+        # "check" / "verify" / "inspect" are interchangeable in these answers
+        t = re.sub(r"^(check|verify|inspect|review|confirm)\s+", "", t)
+        return re.sub(r"[^a-z0-9 ]", "", t)
+
+    lines = answer.split("\n")
+    kept = []
+    seen_headers = set()
+    seen_bodies = []          # normalised content lines we have already kept
+
+    for line in lines:
+        stripped = line.strip()
+
+        # --- Section headers look like "[ SOMETHING ]" ----------------------
+        if stripped.startswith("[") and stripped.endswith("]"):
+            header = stripped.upper()
+
+            # A header we have already produced = the model has looped.
+            if header in seen_headers:
+                break
+
+            # A header that is not one of the three we asked for, appearing
+            # after we already wrote the action plan, is invented padding
+            # ("[ ACTION PLAN DETAILS ]"). Stop there.
+            if header not in expected and "[ ACTION PLAN ]" in seen_headers:
+                break
+
+            seen_headers.add(header)
+            kept.append(line)
+            continue
+
+        # --- Content lines: drop ones we have effectively already said ------
+        # The model often restates a cause or a step with one word changed
+        # ("Check pump alignment..." then "Verify pump alignment...").
+        # Short lines are left alone; they are rarely the problem and are
+        # sometimes legitimately similar.
+        norm = normalise(stripped)
+        if len(norm) > 25:
+            if any(difflib.SequenceMatcher(None, norm, prev).ratio() > 0.90
+                   for prev in seen_bodies):
+                continue
+            seen_bodies.append(norm)
+
+        kept.append(line)
+
+    # Renumber any list that lost entries, so we do not show "1. 2. 5. 6."
+    out, n = [], 0
+    for line in kept:
+        m = re.match(r"^(\s*)\d+([.)]\s+)(.*)$", line)
+        if m:
+            n += 1
+            out.append(f"{m.group(1)}{n}{m.group(2)}{m.group(3)}")
+        else:
+            if line.strip().startswith("["):
+                n = 0        # new section restarts numbering
+            out.append(line)
+
+    removed = len(lines) - len(out)
+    return "\n".join(out).rstrip(), removed
+
+
+def get_embedder_path():
+    """
+    Prefer the local offline copy; fall back to the HuggingFace Hub id.
+
+    Without this, every RAG script would reach out to the internet on startup
+    to fetch the embedding model - which defeats the whole point of an
+    "offline edge device" demo (and melts the wifi when 40 people run it at
+    the same time).
+    """
+    return EMBEDDING_MODEL_DIR if os.path.isdir(EMBEDDING_MODEL_DIR) else EMBEDDING_MODEL_ID
+
+
 # =============================================================================
-# INFERENCE & RAG CONFIGURATION
+# SECTION 3: HOW DOCUMENTS ARE SPLIT FOR RAG  (used by 01_rag_baseline.py)
 # =============================================================================
+# Documents are too long to feed to a 1B model whole, so we cut them into
+# overlapping pieces ("chunks"). The overlap stops us from slicing a sentence
+# in half and losing its meaning.
+#
+# NOTE: these are CHARACTER counts, not tokens. 1024 characters is roughly
+# 250-300 tokens for English technical text.
 CHUNK_SIZE = 1024
 CHUNK_OVERLAP = 150
 
-TEMPERATURE = 0.3
-TOP_P = 0.9
-MAX_TOKENS = 450
-REPEAT_PENALTY = 1.05
-N_CTX = 4096
-TOP_K = 3
+# =============================================================================
+# SECTION 4: HOW THE MODEL GENERATES TEXT
+# =============================================================================
+TEMPERATURE = 0.3        # 0.0 = always pick the likeliest word (repeatable)
+                         # 1.0 = creative and unpredictable.
+                         # 0.3 keeps technical answers consistent.
+TOP_P = 0.9              # Only sample from the most likely 90% of words.
+MAX_TOKENS = 450         # Longest answer we allow. Every demo uses this same
+                         # value so their speeds are directly comparable.
+                         #
+                         # DO NOT RAISE THIS. Measured on the standard pump
+                         # question:
+                         #   450 -> finishes on its own at ~262 tokens, ending
+                         #          on a complete sentence with real readings.
+                         #   800 -> runs to the limit and degenerates, padding
+                         #          the action plan out to 38 repeated steps.
+                         #
+                         # The cap is not cutting answers short; it is stopping
+                         # a small model from rambling. If an answer really is
+                         # truncated, reduce TOP_K instead so less context
+                         # competes for the window.
+REPEAT_PENALTY = 1.05    # Gently discourages the model repeating itself.
+                         #
+                         # MEASURED, on the standard pump question:
+                         #   1.05 -> 1349 chars, quotes 7 real readings
+                         #   1.15 ->  802 chars, quotes the same 7 readings
+                         #
+                         # Both stay grounded; 1.15 just strips the explanation
+                         # around the numbers. We keep 1.05 because a fuller
+                         # answer is better teaching material, and the workshop
+                         # is not in a hurry.
+                         #
+                         # TRADE-OFF: at 1.05 this 1B model will occasionally
+                         # repeat an action-plan step, or loop until it hits
+                         # MAX_TOKENS. That is a real property of small models
+                         # and worth showing. If it happens mid-demo, just ask
+                         # again - or raise this to 1.15 for a terser, tighter
+                         # answer.
+N_CTX = 4096             # Context window: prompt + retrieved docs + answer
+                         # must all fit inside this. Raise to 8192 if answers
+                         # get cut off mid-sentence.
+TOP_K = 3                # How many document chunks RAG retrieves per question.
 
-EXACT_MATCH_THRESHOLD = 0.35
-STRONG_MATCH_THRESHOLD = 0.65
-NO_MATCH_THRESHOLD = 1.0
+# --- Demo visibility --------------------------------------------------------
+# Show the actual document text RAG pulled in, before the model answers.
+# This is the single most useful thing to have on screen during the workshop:
+# participants can see the real readings and history in the retrieved chunks,
+# and then watch which of them the model actually uses in its answer.
+# Set False for a cleaner screen once people have seen it a few times.
+SHOW_RETRIEVED_CONTEXT = True
+CONTEXT_PREVIEW_CHARS = 420   # Per chunk. Raise to see more of each document.
 
-DETERMINISTIC_MODE = False
+DETERMINISTIC_MODE = False   # Set True to force temperature 0 - useful when
+                             # you want the same answer every single run.
 
 # =============================================================================
-# SYSTEM PROMPTS
+# SECTION 5: RAG CONFIDENCE THRESHOLDS
 # =============================================================================
+# ChromaDB returns a "distance" for each retrieved chunk: SMALLER = more
+# similar to the question. Because our embedding model produces unit-length
+# vectors, distance relates to similarity as:  distance = 2 - 2 x cosine
+#
+#   distance 0.35  ->  ~83% similar   (near-perfect match)
+#   distance 0.65  ->  ~68% similar   (clearly relevant)
+#   distance 1.00  ->  ~50% similar   (weak - last useful cutoff)
+#
+# We pick a different system prompt depending on how good the match was.
+# If you swap EMBEDDING_MODEL_ID for a model that does NOT normalise its
+# vectors, these numbers stop being meaningful and must be re-tuned.
+EXACT_MATCH_THRESHOLD = 0.35     # Trust the documents almost completely.
+STRONG_MATCH_THRESHOLD = 0.65    # Use documents, but reason around them.
+NO_MATCH_THRESHOLD = 1.0         # Beyond this, ignore RAG entirely and fall
+                                 # back to the model's own knowledge.
+
+# =============================================================================
+# SECTION 6: SYSTEM PROMPTS
+# =============================================================================
+# A "system prompt" is a standing instruction the model reads before every
+# question. We use three, chosen automatically by how well RAG matched:
+#
+#   BASE_SYSTEM_PROMPT       - no documents available; answer from training.
+#   RAG_SYSTEM_PROMPT        - documents found; ground the answer in them.
+#   EXACT_RAG_SYSTEM_PROMPT  - excellent match; extract almost verbatim.
+#
+# WORKSHOP TALKING POINT: these prompts are long (roughly 560, 720 and 425
+# tokens). On an edge CPU the model must read every one of those tokens
+# before writing a single word of the answer - about 3.5 seconds of pure
+# prompt-reading at ~157 tokens/sec. That is the cost fine-tuning is meant
+# to buy back, by baking the behaviour into the weights instead.
 
 BASE_SYSTEM_PROMPT = """
 You are an offline oil-field field-service decision-support assistant running

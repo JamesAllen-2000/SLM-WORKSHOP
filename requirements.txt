@@ -1,0 +1,49 @@
+# =============================================================================
+# SLM EDGE DEPLOYMENT WORKSHOP - DEPENDENCIES
+# =============================================================================
+# Install with:
+#     pip install -r requirements.txt
+#
+# Tested on: Windows 11, Python 3.13, CPU-only (no GPU / NPU required).
+#
+# IMPORTANT - the --extra-index-url line below is NOT optional.
+# llama-cpp-python publishes NO wheel on PyPI. Without this index, pip tries to
+# compile it from C++ source, which requires Visual Studio Build Tools + CMake
+# and fails on most machines. The index below serves a pre-built CPU wheel.
+# =============================================================================
+
+--extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cpu
+
+# ----- Core deep learning stack (CPU build of PyTorch) -----------------------
+torch==2.14.0
+transformers==5.16.1
+accelerate==1.14.0
+safetensors==0.8.0
+
+# ----- Fine-tuning: QLoRA (step 02) -----------------------------------------
+peft==0.20.0
+trl==1.12.0
+bitsandbytes==0.50.2
+datasets==5.0.1
+
+# ----- Edge inference: quantized GGUF on CPU (steps 03-04) ------------------
+llama-cpp-python==0.3.35
+
+# ----- RAG: embeddings + vector database (step 01) --------------------------
+sentence-transformers==6.0.1
+chromadb==1.5.9
+
+# ----- Document parsing for the RAG corpus (data/rag/) ----------------------
+pypdf==6.16.2               # .pdf
+python-docx==1.2.0          # .docx
+beautifulsoup4==4.15.0      # .html
+
+# ----- Model download + system inspection -----------------------------------
+huggingface_hub==1.30.0
+psutil==7.2.2
+sentencepiece==0.2.2
+protobuf==7.36.1
+
+# NOTE: the `gguf` package is NOT listed here on purpose.
+# llama_source/convert_hf_to_gguf.py bootstraps it from llama_source/gguf-py/
+# automatically, so no pip install is needed for the GGUF conversion in step 03.

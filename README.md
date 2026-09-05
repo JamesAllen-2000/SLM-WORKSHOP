@@ -1,104 +1,175 @@
 # Offline SLM Edge Deployment & RAG Pipeline
 
-This project demonstrates a complete, end-to-end pipeline for downloading, fine-tuning, quantizing, and deploying a Small Language Model (SLM) for entirely offline use on edge devices (such as a field technician's laptop with no internet access and no GPU).
+A complete, hands-on pipeline that turns **Gemma-3 1B** into a fast, private,
+**fully offline** oil-field service assistant running on a plain laptop CPU —
+no GPU, no NPU, no internet connection.
 
-We use **Gemma-3 (1B)** combined with **Retrieval-Augmented Generation (RAG)** to provide highly technical, context-aware answers based on local engineering manuals and service tickets.
+Built as a 3-hour college workshop on Small Language Models, Edge AI and local
+inference.
 
-## 🚀 Features
-
-- **End-to-End Pipeline**: Scripts for every stage from raw model download to fine-tuning, quantization, and final RAG deployment.
-- **Offline Edge Inference**: Uses `llama.cpp` to run a 4-bit quantized (Q4_K_M) version of the model directly on standard CPU hardware with extremely low memory requirements.
-- **Reasoning Model Support**: Built-in Python streaming engines to natively handle and hide reasoning blocks (`<think>`) from advanced models, providing clean outputs to the user.
-- **Robust Windows Process Handling**: Hardened `subprocess` management to prevent `SIGINT` (Ctrl+C) broadcasts from `llama.cpp` from crashing the Python runtime.
-- **Automated Logging & Analysis**: Automatically tracks inference latency, retrieved RAG sources, and model responses, saving them directly to the `results/` and `analysis/` directories.
-
----
-
-## 🛠️ Project Structure
-
-### Core Pipeline
-1. **`00_download_base.py`**
-   Downloads the base Gemma-3 1B model and tokenizer from the HuggingFace Hub.
-2. **`01_rag_baseline.py`**
-   Initializes the ChromaDB vector database, ingests markdown/PDF engineering documents, and runs a baseline RAG test.
-3. **`02_finetune_qlora.py`**
-   Fine-tunes the base model on domain-specific service data using QLoRA, generating a parameter-efficient adapter.
-4. **`03_quantize_gguf.py`**
-   Merges the LoRA adapter into the base model, converts it to FP16 GGUF format, and quantizes it down to a highly optimized `Q4_K_M` GGUF file for CPU execution.
-5. **`04_gguf_rag.py`**
-   The grand finale. Connects the fully quantized GGUF model to the ChromaDB RAG system. It automatically tests a baseline question and then drops into an interactive, offline chat interface.
-
-### Testing & Verification
-Located in the `tests/` directory, these scripts isolate and verify individual components of the pipeline:
-- **`test_00_base.py`**: Validates the base model structure.
-- **`test_01_rag.py`**: Tests the vector retrieval logic independently.
-- **`test_02_adapter.py`**: Tests the LoRA adapter before merging.
-- **`test_03_gguf.py`**: A standalone test for the final quantized GGUF model that features a real-time streaming parser and background loading spinners.
+> **Participants: start with [`WORKSHOP_GUIDE.md`](WORKSHOP_GUIDE.md), not this file.**
+> It walks you through setup and all five demos step by step.
+>
+> **Running the workshop? See [`ORGANIZER.md`](ORGANIZER.md)** — session timings,
+> how to build and prune the participant bundle, and what tends to go wrong.
 
 ---
 
-## 💻 Getting Started
+## What this demonstrates
 
-### Prerequisites
-- Windows OS (Tested on Windows 11)
-- Python 3.14+ (Virtual Environment Recommended)
-- `git config --global core.longpaths true` (Required for Windows HuggingFace caching)
-- **Pre-compiled `llama.cpp` binaries**:
-  - Download the latest Windows release (`llama-bXXXX-bin-win-avx2-x64.zip`) from the [official GitHub releases page](https://github.com/ggerganov/llama.cpp/releases).
-  - Extract it and place the `.exe` and `.dll` files (specifically `llama-completion.exe`) directly into the root directory of this project or inside a `llama.cpp/` folder.
+Three independent levers for getting a useful model onto edge hardware, applied
+one at a time so you can see exactly what each one buys:
 
-### Execution
-Run the pipeline in chronological order:
+| Lever | Gives you | Costs you |
+|---|---|---|
+| **QLoRA fine-tuning** | Behaviour, format, house style | Training time, up front |
+| **RAG** | Facts, sources, updates without retraining | Latency, on every query |
+| **Quantization** | Speed and size | A little precision |
+
+### Measured results
+
+Benchmarked on a 16-core Intel Core Ultra laptop CPU, no GPU:
+
+| | Size on disk | RAM | Generation speed |
+|---|---|---|---|
+| Base model (PyTorch, fp32) | ~1.9 GB | 3.7 GB | **6.4 tok/s** |
+| Quantized (GGUF, Q4_K_M) | **777 MB** | ~0.9 GB | **~30 tok/s** |
+
+**~2.5× smaller, ~5× faster, on the same CPU.** The fine-tuned adapter that
+supplies the model's behaviour is **4.6 MB** of weights — 0.24% of the
+model's parameters.
+
+---
+
+## The five demos
+
+Each changes exactly one thing from the previous:
+
+| Demo | Script | What is new |
+|---|---|---|
+| 1 | `tests/test_00_base_slm.py` | Nothing — the raw model |
+| 2 | `tests/test_02_adapter.py` | **+ Fine-tuning** (behaviour) |
+| 3 | `tests/test_03_adapter_rag.py` | **+ RAG** (facts) |
+| 4 | `tests/test_04_gguf.py` | **+ Quantization** (speed) |
+| 5 | `04_gguf_rag.py` | **Everything together** |
+| — | `tests/test_01_base_slm_rag.py` | Bonus: RAG *without* fine-tuning |
+
+---
+
+## The build pipeline
+
+| Script | Does | Runtime |
+|---|---|---|
+| `00_download_base.py` | Downloads the LLM + embedding model | organiser only |
+| `01_rag_baseline.py` | Parses 32 documents → 592 vector chunks | ~1 min |
+| `02_finetune_qlora.py` | Trains a LoRA adapter on 120 tickets | 30–90 min |
+| `03_quantize_gguf.py` | Merge → GGUF → 4-bit quantize | ~2 min |
+| `verify_setup.py` | Checks everything is in place | seconds |
+
+```
+data/rag/*.pdf .docx .html .json ──► [01] ──► chroma_db/  ──┐
+                                                             ├──► [04/05] answers
+models/it (base) ──► [02] ──► adapter ──► [03] ──► GGUF ────┘
+```
+
+---
+
+## Quick start
+
 ```powershell
-python 00_download_base.py
-python 01_rag_baseline.py
-python 02_finetune_qlora.py
-python 03_quantize_gguf.py
-python 04_gguf_rag.py
-```
-
-### Interactive Field Mode
-To launch the final assistant for offline field queries, simply run:
-```powershell
-python 04_gguf_rag.py
-```
-This will automatically launch the interactive chat loop. All interactions, retrieved sources, and latencies will be securely logged to `results/04_gguf_rag_log.txt`.
-
----
-
-## 🛠️ Troubleshooting
-
-### Issue: The model stops generating mid-sentence or output is suddenly cut off
-This usually happens if your system prompts or RAG context chunks are extremely large, causing the input to blow past the model's context window limit (default is usually 4096 tokens). Once the limit is reached, the model will forcefully stop generating.
-
-**Solution**: 
-Open `config.py` and increase your context limit.
-```python
-N_CTX = 8192
-```
-Alternatively, you can reduce the amount of RAG context injected by lowering `TOP_K` (e.g., `TOP_K = 3`) or reducing the `CHUNK_SIZE`.
-
-### Issue: Installation fails with `[Errno 2] No such file or directory` or `[WinError 206] The filename or extension is too long`
-This occurs when the absolute path of your project directory combined with the deep folder structures of packages (like `llama-cpp-python` or `torch`) exceeds the strict Windows 260-character path limit.
-
-**Solution: Use a Virtual Drive Letter (Fastest, no moving files)**
-You can use the built-in Windows `subst` command to temporarily map your incredibly long project folder path to a simple, short drive letter (like `X:`). This tricks Windows into thinking the path is very short.
-
-1. Open your standard terminal/command prompt and run this exact command (replace the path with your actual project path):
-```cmd
-subst X: "C:\Users\james.allenraj\OneDrive - Orion Systems Integrators, LLC\Documents\ORION INC\SLM Workshop\SLM WORKSHOP"
-```
-2. Switch to that new drive by typing:
-```cmd
-X:
-```
-3. Activate your virtual environment from there:
-```cmd
+python -m venv venv
 .\venv\Scripts\activate
-```
-4. Run your installation again:
-```cmd
 pip install -r requirements.txt
+python verify_setup.py
 ```
 
-*(Note: To remove the virtual drive later, you just run `subst X: /D`)*
+Then follow [`WORKSHOP_GUIDE.md`](WORKSHOP_GUIDE.md).
+
+> **`requirements.txt` starts with an `--extra-index-url` line. Do not remove it.**
+> `llama-cpp-python` ships no wheel on PyPI, so without that index pip tries to
+> compile it from C++ source and fails unless you have MSVC Build Tools.
+
+---
+
+## Requirements
+
+- Windows 10 / 11, **Python 3.13**
+- 8 GB RAM minimum (16 GB comfortable), 10 GB free disk
+- Internet for setup only — the workshop itself runs offline
+- `models/` is distributed separately (too large for git)
+- Building the bundle yourself needs a HuggingFace login — Gemma is a gated
+  model. See [`ORGANIZER.md`](ORGANIZER.md). Participants do not need one.
+
+---
+
+## Repository layout
+
+```
+├── config.py                 # Every setting and prompt, in one place
+├── requirements.txt          # Pinned, tested dependency set
+├── verify_setup.py           # Pre-flight check
+├── 00–04_*.py                # The build pipeline
+├── inspect_system.py         # Hardware snapshot
+├── tests/                    # The five demos
+├── data/
+│   ├── rag/                  # 8 scenarios x 4 formats = 32 documents
+│   └── finetune/train.jsonl  # 120 maintenance tickets
+├── llama.cpp/                # Pre-compiled inference binaries (Windows)
+├── llama_source/             # GGUF conversion tooling
+├── models/                   # Supplied separately — not in git
+├── chatbot_question_bank.md  # 100+ scenario questions to try
+└── WORKSHOP_GUIDE.md         # ← the participant guide
+```
+
+Generated at runtime: `chroma_db/` (vector database), `results/` (interaction
+logs), `analysis/` (size and timing reports).
+
+---
+
+## Configuration
+
+Everything tunable lives in [`config.py`](config.py):
+
+| Setting | Default | Does what |
+|---|---|---|
+| `ACTIVE_MODEL_ID` | `google/gemma-3-1b-it` | Which model to use |
+| `TOP_K` | `3` | Document chunks retrieved per question |
+| `TEMPERATURE` | `0.3` | 0.0 repeatable → 1.0 creative |
+| `MAX_TOKENS` | `450` | Longest answer allowed |
+| `N_CTX` | `4096` | Context window; raise if answers truncate |
+| `CHUNK_SIZE` | `1024` | Document chunk size, **in characters** |
+| `DETERMINISTIC_MODE` | `False` | `True` forces identical answers |
+
+Alternative models (Qwen 0.5B/1.5B/1.7B) are listed commented in `config.py`.
+Switching requires re-running the full `00 → 03` pipeline.
+
+---
+
+## Troubleshooting
+
+See the troubleshooting section of [`WORKSHOP_GUIDE.md`](WORKSHOP_GUIDE.md).
+The most common issues:
+
+| Symptom | Fix |
+|---|---|
+| `GatedRepoError` / `401` on download | Gemma is gated — see [`ORGANIZER.md`](ORGANIZER.md). Participants never hit this. |
+| `ModuleNotFoundError: llama_cpp` | Install with the extra index URL above |
+| `No quantized model found` | Run `03_quantize_gguf.py` |
+| ChromaDB errors | Run `01_rag_baseline.py --rebuild` |
+| Answers cut off mid-sentence | Raise `N_CTX` to `8192` in `config.py` |
+| `[WinError 206] path too long` | Use `subst X: "<long path>"`, then work from `X:` |
+
+---
+
+## Notes on the design
+
+- **CPU only, by choice.** `n_gpu_layers=0` throughout. The point is what runs
+  on hardware people already own.
+- **Retrieval is graded, not binary.** `config.py` defines three distance
+  thresholds; the closer the match, the more strongly the model is told to stick
+  to the retrieved documents (`EXACT` → `STRONG` → `MODERATE` → `NO_RAG`).
+  Those thresholds assume unit-normalised embeddings, which the default
+  MiniLM model produces.
+- **The fine-tune teaches format, not facts.** Training targets are built only
+  from fields the dataset actually contains — a summary and the recorded
+  resolution steps. Causes need evidence, and evidence is RAG's job.
