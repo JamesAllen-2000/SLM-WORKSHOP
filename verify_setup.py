@@ -138,12 +138,26 @@ def check_models():
         check("config.py", False, str(e)[:40], "Run from the project root folder.")
         return
 
+    # --- Catch the classic extraction mistake first -------------------------
+    # models.zip contains a folder called "models". Windows' Extract All
+    # suggests a destination ALSO called "models", so people end up with
+    # models/models/. Detect that and say so, rather than just reporting
+    # everything as MISSING and leaving them to guess why.
+    if os.path.isdir("models/models"):
+        check(
+            "models/ folder layout", False,
+            "found models\\models\\ - extracted one level too deep",
+            "Fix with:  Move-Item models\\models\\* models\\ -Force  "
+            "then  Remove-Item models\\models",
+        )
+        return
+
     # --- Base LLM ----------------------------------------------------------
     base_ok = os.path.isfile(os.path.join(LOCAL_MODEL_DIR, "config.json"))
     check(
         "Base model", base_ok,
         f"{LOCAL_MODEL_DIR} ({dir_size_mb(LOCAL_MODEL_DIR):.0f} MB)" if base_ok else "",
-        "Copy the models/ folder from the workshop USB / shared drive.",
+        "Extract models.zip into the project folder - see PREREQUISITES.md step 6.",
     )
 
     # --- Embedding model ---------------------------------------------------

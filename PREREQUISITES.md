@@ -153,9 +153,48 @@ This downloads roughly 250 MB and takes a few minutes.
 
 The models are too large for GitHub, so they are shared separately.
 
-1. Download **`models.zip`** (about 2.4 GB) from the link your instructor sent
-2. Extract it **into the project folder**
-3. You should end up with `C:\SLM-WORKSHOP\models\`
+**Download `models.zip`** (about 2.4 GB) from the link your instructor sent.
+
+### ⚠️ Extract it carefully — this is where most people go wrong
+
+The zip already contains a folder called `models`. If you right-click and use
+**Extract All**, Windows suggests a destination folder *also* called `models` —
+and you end up with `models\models\`, which does not work.
+
+**This is what you want:**
+
+```
+C:\SLM-WORKSHOP\
+├── config.py
+├── requirements.txt
+├── models\              <-- the extracted folder
+│   ├── it\
+│   ├── embedder\
+│   ├── adapter_20260905_143045\
+│   └── gguf\
+└── tests\
+```
+
+**This is the mistake to avoid:**
+
+```
+C:\SLM-WORKSHOP\
+└── models\
+    └── models\          <-- WRONG: one folder too deep
+        ├── it\
+        └── ...
+```
+
+### The safe way — copy and paste this
+
+```powershell
+cd C:\SLM-WORKSHOP
+Expand-Archive -Path "$env:USERPROFILE\Downloads\models.zip" -DestinationPath . -Force
+```
+
+The `-DestinationPath .` means *"into the current folder"*. Because the zip
+already carries its own `models` folder, this lands it in exactly the right
+place. Adjust the path if your download went somewhere other than `Downloads`.
 
 ### Check it worked
 
@@ -164,6 +203,15 @@ dir C:\SLM-WORKSHOP\models
 ```
 
 **Expected:** four items — `it`, `embedder`, `adapter_...`, `gguf`
+
+If instead you see a single item called `models`, you have the double-folder
+problem. Fix it with:
+
+```powershell
+cd C:\SLM-WORKSHOP
+Move-Item models\models\* models\ -Force
+Remove-Item models\models
+```
 
 > **Google Drive will warn** *"Google Drive can't scan this file for viruses"*
 > because the file is large. This is normal. Click **Download anyway**.
