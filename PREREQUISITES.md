@@ -34,6 +34,11 @@ Tick these off as you go:
 
 > No graphics card is required. Everything runs on your ordinary CPU. That is
 > the whole point of the workshop.
+>
+> **Platform note for quantization:** Windows can use the bundled precompiled
+> `llama.cpp` binaries. Linux and macOS require a native `llama-quantize`
+> executable, either built from llama.cpp or supplied through the
+> `LLAMA_QUANTIZE_PATH` environment variable.
 
 ---
 
