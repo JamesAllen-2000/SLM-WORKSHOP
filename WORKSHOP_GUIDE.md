@@ -512,6 +512,15 @@ python verify_setup.py          # confirm
 Your own adapter and GGUF get timestamped folders, and every demo automatically
 picks the **newest** one — so your build replaces ours with no config changes.
 
+For Step 04 specifically, `04_gguf_rag.py` searches `models/gguf/` for files
+matching the active model name and the `*-q4_k_m.gguf` suffix. If more than one
+matching file is present, it selects the file with the newest filesystem
+modification time; it does not select by parsing the timestamp in the filename.
+This means a copied or restored file can become the selected model if its
+modification time is newer. Before a demo, check the startup line beginning
+with `Model` to confirm which GGUF was loaded. The script does not overwrite or
+delete any matching model files.
+
 To train faster, open `02_finetune_qlora.py` and set `MAX_DATASET_SIZE = 60`.
 That halves it.
 
