@@ -79,24 +79,41 @@ Q4_GGUF_PATH = f"{GGUF_DIR}/{safe_name}-finetuned-{run_id}-q4_k_m.gguf"
 # ---------------------------------------------------------------------------
 def find_llama_exe(name):
     """
-    Find a llama.cpp tool, checking the bundled folder before the system PATH.
+    Find a llama.cpp tool using the platform's preferred executable format.
 
-    The workshop ships pre-compiled binaries in llama.cpp/, so participants
-    never have to build C++ themselves.
+    Windows prefers the bundled ``.exe`` binaries. Linux and macOS prefer
+    native executables; those platforms need a native llama.cpp build because
+    the bundled binaries are Windows-specific. ``LLAMA_QUANTIZE_PATH`` may be
+    used to provide an explicit executable path for the quantizer.
     """
-    candidates = [
-        os.path.join("llama.cpp", f"{name}.exe"),
-        os.path.join("llama.cpp", name),
-        f"{name}.exe",
-        name,
-    ]
-    for c in candidates:
-        if os.path.exists(c):
-            return os.path.abspath(c)
+    override = os.environ.get("LLAMA_QUANTIZE_PATH")
+    if override:
+        if os.path.isfile(override) and (
+            os.name == "nt" or os.access(override, os.X_OK)
+        ):
+            return os.path.abspath(override)
+        return None
 
-    # Fall back to anything already on PATH.
-    found = shutil.which(name)
-    return found  # None if genuinely unavailable
+    executable_names = (
+        [f"{name}.exe", name] if os.name == "nt" else [name, f"{name}.exe"]
+    )
+    candidates = [
+        os.path.join(directory, executable_name)
+        for directory in ("llama.cpp", ".")
+        for executable_name in executable_names
+    ]
+    for candidate in candidates:
+        if os.path.isfile(candidate) and (
+            os.name == "nt" or os.access(candidate, os.X_OK)
+        ):
+            return os.path.abspath(candidate)
+
+    # Fall back to executables already available on PATH.
+    for executable_name in executable_names:
+        found = shutil.which(executable_name)
+        if found:
+            return found
+    return None
 
 
 # ---------------------------------------------------------------------------
@@ -228,7 +245,10 @@ def quantize_gguf():
 
     quantize_exe = find_llama_exe("llama-quantize")
     if quantize_exe is None:
-        print("ERROR: llama-quantize not found in llama.cpp/ or on PATH.")
+        print("ERROR: No usable llama-quantize executable was found.")
+        print("Windows users can use the bundled binary; Linux/macOS users "
+              "need a native llama.cpp build or can set "
+              "LLAMA_QUANTIZE_PATH to its executable.")
         raise SystemExit(1)
 
     # Q4_K_M = 4-bit "K-quant, Medium". It keeps the most sensitive tensors at
